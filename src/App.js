@@ -1,26 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Router, Link } from "@reach/router";
+import {Pspdfkit} from './Pspdfkit';
+import {Pdftron} from './Pdftron';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <nav>
+        <NavLink to="/">PSPDFKIT</NavLink>
+        <NavLink to="/pdftron">PDFTron</NavLink>
+      </nav>
+      <div className="content">
+        <Router>
+          <Pspdfkit path="/" default />
+          <Pdftron path="/pdftron" />
+        </Router>
+      </div>
     </div>
   );
 }
+
+const NavLink = props => (
+  <Link {...props} getProps={({isCurrent}) => ({
+    className: isCurrent ? "active" : ""
+  })}/>
+)
 
 export default App;
